@@ -12,14 +12,14 @@ def execute(workflows, schedules, dictionary, ip, ptimes):
 			assert job in workflow.get_possible_nodes()
 			st = time.time()
 			workflow.execute(job, ip)
-			if job.split('_')[0] not in ptimes: ptimes[job.split('_')[0]] = []
 			ptimes[job.split('_')[0]].append(workflow.executed[job] - st)
 		assert workflow.check_complete()
 
 if __name__ == "__main__":
 	shutil.rmtree('temp', ignore_errors=True)
 	ip = 'localhost'
-	ptimes = {}
+	apps = [fn for fn in os.listdir('./functions/') if '.' not in fn]
+	ptimes = dict(zip(apps, [[] for _ in range(len(apps))]))
 	workflows, dictionary = form_all_workflows()
 	with open(f"{opts.scheduler}.json", "r") as outfile:
 	    schedules = json.load(outfile)
