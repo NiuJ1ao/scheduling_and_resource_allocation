@@ -58,7 +58,7 @@ We will be using Microsoft Azure services to deploy a serverless function on the
 ssh azureuser@<public_ip>
 
 # clone git repo
-git clone https://github.com/imperial-qore/WorkflowSchedulingCwk
+git clone https://gitlab.doc.ic.ac.uk/gcasale/70068-cwk-ay2021-22.git
 cd WorkflowSchedulingCwk
 
 # install Azure CLI 
