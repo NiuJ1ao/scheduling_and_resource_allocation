@@ -59,6 +59,7 @@ ssh azureuser@<public_ip>
 
 # clone git repo
 git clone https://gitlab.doc.ic.ac.uk/gcasale/70068-cwk-ay2021-22.git
+mv 70068-cwk-ay2021-22/ WorkflowSchedulingCwk/
 cd WorkflowSchedulingCwk
 
 # install Azure CLI 
