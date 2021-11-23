@@ -1,7 +1,7 @@
 from my_utils import get_workflow_from_json, tardiness, dump_schedule, total_tardiness
 import numpy as np
-import copy
 import random
+random.seed(42)
 try:
     from tabulate import tabulate
 except ImportError:

@@ -2,7 +2,7 @@
 This code runs Python 3.8 with the following libraries:
 - numpy
 pip install numpy
-- tabulate (optional)
+- tabulate (optional for printing intermediate results)
 pip install tabulate
 
 ## Run

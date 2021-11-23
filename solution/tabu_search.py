@@ -109,7 +109,7 @@ def tabu_search(workflow, init_s, iter_num=5, tabu_size=5, gamma=30):
             neighbours.append(y)
             candidates_k[str(y)] = {"cost": g_y, "pair": pair, "delta": delta}
             
-        # selet next neighbour in lexicographic order
+        # seleted next neighbour in lexicographic order
         neighbours.sort()
         
         visual_k, gs_k, is_tabu = [], [], []
@@ -158,7 +158,7 @@ def tabu_search(workflow, init_s, iter_num=5, tabu_size=5, gamma=30):
     best = np.array(candidates[best_idx+1])
     process_times_y = [process_times[node_types[j].split('_')[0]] for j in best]
     complete_times = np.cumsum(process_times_y)
-    return best + 1, complete_times[-1], total_tardiness(best, complete_times, due_dates)
+    return best + 1, complete_times[-1], g_best
 
 if __name__ == "__main__":
     import argparse
