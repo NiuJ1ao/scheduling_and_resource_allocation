@@ -25,7 +25,7 @@ def tardiness(complete_time, due_date):
     return max(0, complete_time - due_date)
 
 def total_tardiness(schedule, complete_times, due_dates):
-    weights = {j: 1 for j in schedule}
+    weights = [1] * len(schedule)
     return weighted_tardiness(schedule, complete_times, due_dates, weights)
     
 def weighted_tardiness(schedule, complete_times, due_dates, weights):

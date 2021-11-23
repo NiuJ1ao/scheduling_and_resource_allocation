@@ -53,10 +53,11 @@ def least_cost_last(workflow):
         # Remove j from V
         update_graph(graph, j)
         
-        intermediate_sol.append([k, [job for job in schedule if job != -1], {node: round(gs[node], 2) for node in gs}])
+        intermediate_sol.append([k, [job+1 for job in schedule if job != -1], {node+1: round(gs[node], 2) for node in gs}])
 
     if 'tabulate' in globals():
         print(tabulate(intermediate_sol, headers=['k', 'schedule', 'g_j with no immediate successors']))
+    
     complete_times = np.cumsum([process_times[node_types[j].split('_')[0]] for j in schedule])
     return np.array(schedule) + 1, complete_times[-1], total_tardiness(schedule, complete_times, due_dates)
 

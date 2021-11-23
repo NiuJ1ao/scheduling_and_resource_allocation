@@ -7,6 +7,6 @@ pip install tabulate
 
 ## Run
 python tabu_search.py \
---workflow_file input.json --process_time_file process_times.txt --dump_schedule \
--i 10 -t 5 -g 100
-
+--dump_schedule \
+--workflow_file input.json --process_time_file process_times.txt --init_schedule_file sinit.csv \
+-i 10 -t 5 -g 30

@@ -1,3 +1,4 @@
+from os import pread
 from my_utils import get_workflow_from_json, total_tardiness, dump_schedule, weighted_tardiness
 from collections import deque, defaultdict
 import copy
@@ -30,7 +31,7 @@ class tabu_list():
         return result
 
     def __str__(self):
-        return str([tuple(e) for e in self._l if e != 0])
+        return str([(tuple(e)[0]+1, tuple(e)[1]+1) for e in self._l if e != 0])
 
 def validate_neighbour(schedule, precedences, idx_i, idx_j):
     job_i, job_j = schedule[idx_i], schedule[idx_j]
@@ -76,7 +77,7 @@ def tabu_search(workflow, init_s, iter_num=5, tabu_size=5, gamma=30):
     best_idx = 0
     
     # for visualize intermediate solution
-    intermediate_sol = [[0, copy.deepcopy(tabu), g_best, np.array(init_s)+1, g_x, "x"]]
+    intermediate_sol = [[0, copy.deepcopy(tabu), g_best, np.array(init_s)+1, round(g_x, 2), "x"]]
     for k in range(iter_num):
         sol = [k+1]
         sol.append(copy.deepcopy(tabu))
@@ -87,7 +88,7 @@ def tabu_search(workflow, init_s, iter_num=5, tabu_size=5, gamma=30):
 
         neighbours = []
         candidates_k = {}
-        for i in range(len(init_s)-1):
+        for i in range(len(x)-1):
             # swap jobs to create a neighbour
             pair = {x[i], x[i+1]}
             y = copy.deepcopy(x)
@@ -130,7 +131,7 @@ def tabu_search(workflow, init_s, iter_num=5, tabu_size=5, gamma=30):
             if (delta > -gamma and pair not in tabu) or g_y < g_best:
                 is_optimal = False
                 sol.append(np.array(visual_k) + 1)
-                sol.append(np.array(gs_k).reshape(-1,1))
+                sol.append(np.array([round(g, 2) for g in gs_k]).reshape(-1,1))
                 sol.append(np.array(is_tabu))
                 break
             
@@ -148,7 +149,7 @@ def tabu_search(workflow, init_s, iter_num=5, tabu_size=5, gamma=30):
             best_idx = k
             g_best = g_y
         
-        intermediate_sol.append(sol)
+            intermediate_sol.append(sol)
     
     # visualize intermediate 
     if 'tabulate' in globals():
